@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_CONFIG } from '../config';
 
 const TaskForm = ({ addTask }) => {
   const [title, setTitle] = useState('');
@@ -9,7 +10,7 @@ const TaskForm = ({ addTask }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/tasks', { title, description }, {
+      const res = await axios.post(API_CONFIG.TASKS, { title, description }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       addTask(res.data);

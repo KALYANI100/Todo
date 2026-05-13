@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
+import { API_CONFIG } from '../config';
 
 const History = () => {
   const [tasks, setTasks] = useState([]);
@@ -15,7 +16,7 @@ const History = () => {
 
     const fetchHistory = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/tasks/history', {
+        const res = await axios.get(API_CONFIG.TASKS_HISTORY, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTasks(res.data);

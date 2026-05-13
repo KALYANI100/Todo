@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { API_CONFIG } from '../config';
 import TaskItem from './TaskItem';
 import TaskForm from './TaskForm';
 
@@ -17,7 +18,7 @@ const TaskList = () => {
 
     const fetchTasks = async () => {
       try {
-        const res = await axios.get('http://localhost:5000/api/tasks', {
+        const res = await axios.get(API_CONFIG.TASKS, {
           headers: { Authorization: `Bearer ${token}` }
         });
         setTasks(res.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { API_CONFIG } from '../config';
 
 const TaskItem = ({ task, updateTask, deleteTask }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -10,7 +11,7 @@ const TaskItem = ({ task, updateTask, deleteTask }) => {
 
   const handleUpdate = async () => {
     try {
-      const res = await axios.put(`http://localhost:5000/api/tasks/${task._id}`, { title, description, completed }, {
+      const res = await axios.put(`${API_CONFIG.TASKS}/${task._id}`, { title, description, completed }, {
         headers: { Authorization: `Bearer ${token}` }
       });
       updateTask(res.data);
@@ -22,7 +23,7 @@ const TaskItem = ({ task, updateTask, deleteTask }) => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`http://localhost:5000/api/tasks/${task._id}`, {
+      await axios.delete(`${API_CONFIG.TASKS}/${task._id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       deleteTask(task._id);
